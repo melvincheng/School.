@@ -1,0 +1,246 @@
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+lym_nodes_dimin <= 1
+|   changes_in_node = no
+|   |   defect_in_node = no: normal (3.0/1.0)
+|   |   defect_in_node = lacunar: malign_lymph (2.0)
+|   |   defect_in_node = lac_margin: normal (0.0)
+|   |   defect_in_node = lac_central: normal (0.0)
+|   changes_in_node = lacunar
+|   |   exclusion_of_no = no: metastases (10.0/1.0)
+|   |   exclusion_of_no = yes
+|   |   |   special_forms = no: metastases (3.0/1.0)
+|   |   |   special_forms = chalices
+|   |   |   |   lym_nodes_enlar <= 2: malign_lymph (3.0)
+|   |   |   |   lym_nodes_enlar > 2: metastases (2.0)
+|   |   |   special_forms = vesicles: malign_lymph (19.0/1.0)
+|   changes_in_node = lac_margin
+|   |   block_of_affere = no
+|   |   |   extravasates = no
+|   |   |   |   lymphatics = normal: metastases (0.0)
+|   |   |   |   lymphatics = arched
+|   |   |   |   |   early_uptake_in = no: metastases (5.0/1.0)
+|   |   |   |   |   early_uptake_in = yes: malign_lymph (4.0/1.0)
+|   |   |   |   lymphatics = deformed: metastases (5.0)
+|   |   |   |   lymphatics = displaced: malign_lymph (1.0)
+|   |   |   extravasates = yes: malign_lymph (4.0)
+|   |   block_of_affere = yes: metastases (56.0/3.0)
+|   changes_in_node = lac_central
+|   |   no_of_nodes_in <= 1
+|   |   |   block_of_affere = no: malign_lymph (3.0)
+|   |   |   block_of_affere = yes: metastases (2.0)
+|   |   no_of_nodes_in > 1: malign_lymph (20.0)
+lym_nodes_dimin > 1
+|   by_pass = no: metastases (2.0/1.0)
+|   by_pass = yes: fibrosis (4.0)
+
+Number of Leaves  : 	21
+
+Size of the tree : 	34
+
+
+=== Classifier model (full training set) ===
+
+JRIP rules:
+===========
+
+(lymphatics = normal) => class=normal (2.0/0.0)
+(lym_nodes_dimin >= 2) and (by_pass = yes) => class=fibrosis (4.0/0.0)
+(no_of_nodes_in >= 3) and (special_forms = vesicles) => class=malign_lymph (41.0/5.0)
+(block_of_affere = no) and (extravasates = yes) => class=malign_lymph (8.0/0.0)
+(changes_in_node = lac_central) => class=malign_lymph (8.0/2.0)
+ => class=metastases (85.0/11.0)
+
+Number of Rules : 6
+
+
+=== Classifier model (full training set) ===
+
+Id3
+
+
+changes_in_node = no
+|  lymphatics = normal: normal
+|  lymphatics = arched
+|  |  early_uptake_in = no: metastases
+|  |  early_uptake_in = yes: malign_lymph
+|  lymphatics = deformed: fibrosis
+|  lymphatics = displaced: malign_lymph
+changes_in_node = lacunar
+|  special_forms = no
+|  |  bl_of_lymph_c = no
+|  |  |  changes_in_stru = no: null
+|  |  |  changes_in_stru = grainy: metastases
+|  |  |  changes_in_stru = drop_like
+|  |  |  |  extravasates = no: metastases
+|  |  |  |  extravasates = yes: malign_lymph
+|  |  |  changes_in_stru = coarse: metastases
+|  |  |  changes_in_stru = diluted
+|  |  |  |  block_of_affere = no: malign_lymph
+|  |  |  |  block_of_affere = yes: metastases
+|  |  |  changes_in_stru = reticular: null
+|  |  |  changes_in_stru = stripped: null
+|  |  |  changes_in_stru = faint: metastases
+|  |  bl_of_lymph_c = yes: fibrosis
+|  special_forms = chalices
+|  |  block_of_affere = no
+|  |  |  lymphatics = normal: null
+|  |  |  lymphatics = arched: malign_lymph
+|  |  |  lymphatics = deformed: malign_lymph
+|  |  |  lymphatics = displaced: metastases
+|  |  block_of_affere = yes: metastases
+|  special_forms = vesicles
+|  |  early_uptake_in = no
+|  |  |  lymphatics = normal: null
+|  |  |  lymphatics = arched: metastases
+|  |  |  lymphatics = deformed: fibrosis
+|  |  |  lymphatics = displaced: null
+|  |  early_uptake_in = yes
+|  |  |  changes_in_stru = no: metastases
+|  |  |  changes_in_stru = grainy: null
+|  |  |  changes_in_stru = drop_like: null
+|  |  |  changes_in_stru = coarse: malign_lymph
+|  |  |  changes_in_stru = diluted: malign_lymph
+|  |  |  changes_in_stru = reticular: malign_lymph
+|  |  |  changes_in_stru = stripped: malign_lymph
+|  |  |  changes_in_stru = faint: malign_lymph
+changes_in_node = lac_margin
+|  block_of_affere = no
+|  |  extravasates = no
+|  |  |  lymphatics = normal: null
+|  |  |  lymphatics = arched
+|  |  |  |  changes_in_stru = no: null
+|  |  |  |  changes_in_stru = grainy: null
+|  |  |  |  changes_in_stru = drop_like
+|  |  |  |  |  changes_in_lym = bean: null
+|  |  |  |  |  changes_in_lym = oval: metastases
+|  |  |  |  |  changes_in_lym = round: malign_lymph
+|  |  |  |  changes_in_stru = coarse: malign_lymph
+|  |  |  |  changes_in_stru = diluted: malign_lymph
+|  |  |  |  changes_in_stru = reticular: metastases
+|  |  |  |  changes_in_stru = stripped: null
+|  |  |  |  changes_in_stru = faint
+|  |  |  |  |  early_uptake_in = no: metastases
+|  |  |  |  |  early_uptake_in = yes: malign_lymph
+|  |  |  lymphatics = deformed: metastases
+|  |  |  lymphatics = displaced: malign_lymph
+|  |  extravasates = yes: malign_lymph
+|  block_of_affere = yes
+|  |  changes_in_stru = no: null
+|  |  changes_in_stru = grainy: metastases
+|  |  changes_in_stru = drop_like: metastases
+|  |  changes_in_stru = coarse: metastases
+|  |  changes_in_stru = diluted
+|  |  |  no_of_nodes_in = '(-inf-3.5]': metastases
+|  |  |  no_of_nodes_in = '(3.5-inf)': malign_lymph
+|  |  changes_in_stru = reticular: null
+|  |  changes_in_stru = stripped: malign_lymph
+|  |  changes_in_stru = faint
+|  |  |  no_of_nodes_in = '(-inf-3.5]': metastases
+|  |  |  no_of_nodes_in = '(3.5-inf)': malign_lymph
+changes_in_node = lac_central
+|  lym_nodes_enlar = '(-inf-2.5]'
+|  |  changes_in_stru = no: null
+|  |  changes_in_stru = grainy
+|  |  |  block_of_affere = no: malign_lymph
+|  |  |  block_of_affere = yes: metastases
+|  |  changes_in_stru = drop_like: null
+|  |  changes_in_stru = coarse: null
+|  |  changes_in_stru = diluted: metastases
+|  |  changes_in_stru = reticular: null
+|  |  changes_in_stru = stripped: null
+|  |  changes_in_stru = faint: malign_lymph
+|  lym_nodes_enlar = '(2.5-inf)': malign_lymph
+
+
+JRip
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.912     0.105      0.886     0.912     0.899      0.938    0
+                 0.895     0.088      0.919     0.895     0.907      0.938    1
+Weighted Avg.    0.903     0.096      0.903     0.903     0.903      0.938
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 186  18 |   a = 0
+  24 204 |   b = 1
+
+
+J48
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.053      0.944     1         0.971      0.983    0
+                 0.947     0          1         0.947     0.973      0.983    1
+Weighted Avg.    0.972     0.025      0.974     0.972     0.972      0.983
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 204   0 |   a = 0
+  12 216 |   b = 1
+
+
+IBk
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.941     0.184      0.821     0.941     0.877      0.933    0
+                 0.816     0.059      0.939     0.816     0.873      0.933    1
+Weighted Avg.    0.875     0.118      0.883     0.875     0.875      0.933
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 192  12 |   a = 0
+  42 186 |   b = 1
+
+
+NaiveBayes
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.053      0.944     1         0.971      0.975    0
+                 0.947     0          1         0.947     0.973      0.975    1
+Weighted Avg.    0.972     0.025      0.974     0.972     0.972      0.975
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 204   0 |   a = 0
+  12 216 |   b = 1
+
+
+MultiLayerPerceptron
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.123      0.879     1         0.936      0.967    0
+                 0.877     0          1         0.877     0.935      0.967    1
+Weighted Avg.    0.935     0.058      0.943     0.935     0.935      0.967
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 204   0 |   a = 0
+  28 200 |   b = 1
+
+Id3
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.98      0.055      0.943     0.98      0.962      0.964    0
+                 0.945     0.02       0.981     0.945     0.963      0.946    1
+Weighted Avg.    0.962     0.036      0.963     0.962     0.962      0.955
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 200   4 |   a = 0
+  12 208 |   b = 1
+
