@@ -1,0 +1,82 @@
+Practical
+
+pwd			-	print working directory
+cd			-	change directory
+ls			-	listng (put directory after to show listing of that directory)
+	-F		-	show folders (folder/)
+	-a		-	show all
+	-s 		-	size
+	-h		-	human friendly(extension for -s)
+	-l 		-	permissions, user owner, group owner, size, last modified, name
+		-	-	regular
+		d 	-	directory, rights to traverse directory
+mkdir		-	make directory
+nano		-	bash text editor
+rm			-	remove file
+rmdir		-	remove directory(only if empty)
+mv x z		-	move x to z
+cp x z		-	copy file x to directory z
+wc			-	word count(count lines words characer in file)
+	-l 		-	lines only
+	-w 		-	words only
+	-c 		-	characters only
+sort		-	sort file
+chmod		-	change mode, change permission
+	u=p 	-	change user permission to p(r,w,x,blank for none)
+	g=p 	-	change group permission to p
+	a=p 	-	change everyone else permission to p
+	x+y		-	give permission y to x
+cat x - y	-	concatenate
+cat 		-	create own commands
+	cat > x	-	create a command with name x
+grep		-	global/regular expression/print, finds and prints line in files that match pattern
+	x y		-	file pattern x in file y, every letter matches itself
+	-w 		-	match whole word
+	-n 		-	prefix matches with line numbers
+	-i 		-	case insensitive
+	-v		-	invert and print non-matches
+man	x		-	manual of command x
+find 		-	find files
+	-type x	-	find file type x
+		d 	-	directory
+		f 	-	file
+	-mindepth x	-	go atleast x directory down
+	-maxdepth x	-	go no more than x directory down
+	-empty	-	file is empty
+	-perm 	-	permission
+	-name 	-	name
+ps 			-	process
+fbcmd		-	run in foreground
+jobs		-	show background process
+fg			-	bring background job to foreground, resume foreground job
+	%x		-	bring x number jobs to foreground
+bg 			-	resume background job
+kill		-	kill process
+
+
+head -x		-	get line x of file(pdb file only)
+
+x |	y		-	|(pipe) x(filter) as input y(filter) as output, no file created
+>			-	output file
+;			-	put multiple commands
+''			-	prevent shell from expanding 
+``			-	replace whatever inside with its output
+
+
+stdin		-	standard input
+stdout		-	standard output
+
+.			-	current directory
+..			-	parent directory
+./			-	file, exe of this directory
+
+file/		-	folder
+file*		-	executable
+
+^d 			-	end of input
+^c 			-	stop running
+^z			-	pause
+&			- 	run in background
+
+
+
