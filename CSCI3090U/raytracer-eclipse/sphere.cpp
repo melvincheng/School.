@@ -22,40 +22,28 @@
 
 Hit Sphere::intersect(const Ray &ray)
 {
-    /****************************************************
-    * RT1.1: INTERSECTION CALCULATION
-    *
-    * Given: ray, position, r
-    * Sought: intersects? if true: *t
-    * 
-    * Insert calculation of ray/sphere intersection here. 
-    *
-    * You have the sphere's center (C) and radius (r) as well as
-    * the ray's origin (ray.O) and direction (ray.D).
-    *
-    * If the ray does not intersect the sphere, return false.
-    * Otherwise, return true and place the distance of the
-    * intersection point from the ray origin in *t (see example).
-    ****************************************************/
+    double t = 0.0;
+    double A = ray.D.dot(ray.D);
+    double B = 2.0 * ray.D.dot(ray.O - position);
+    double C = (ray.O - position).dot(ray.O - position) - (r * r);
 
-    // place holder for actual intersection calculation
-
-    Vector OC = (position - ray.O).normalized();
-    if (OC.dot(ray.D) < 0.999) {
+    double root = B * B - 4.0 * A * C;
+    if(root < 0.0){
         return Hit::NO_HIT();
     }
-    double t = 1000;
 
-    /****************************************************
-    * RT1.2: NORMAL CALCULATION
-    *
-    * Given: t, C, r
-    * Sought: N
-    * 
-    * Insert calculation of the sphere's normal at the intersection point.
-    ****************************************************/
+    double plusRoot = (-1.0 * B + sqrt(root))/(2.0 * A);
+    double minusRoot = (-1.0 * B - sqrt(root))/(2.0 * A);
 
-    Vector N /* = ... */;
+    if((plusRoot < minusRoot) && (plusRoot >= 0.0)){
+        t = plusRoot;
+    }else if((minusRoot < plusRoot) && (minusRoot >= 0.0)){
+        t = minusRoot;
+    }else{
+        return Hit::NO_HIT();
+    }
 
+    Vector N = ray.at(t) - position;
+    N.normalize();
     return Hit(t,N);
 }

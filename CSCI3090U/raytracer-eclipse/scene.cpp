@@ -38,6 +38,26 @@ Color Scene::trace(const Ray &ray)
     Vector N = min_hit.N;                          //the normal at hit point
     Vector V = -ray.D;                             //the view vector
 
+    Triple R;
+    Vector L;
+    Color color, ambient, diffuse, specular, totalDiffuse, totalSpecular;
+    ambient = material->ka * material->color;
+    Ray shadowRay;
+
+    for(int i = 0;i<lights.size();i++){
+        L = lights[i]->position - N;
+        L.normalize();
+        R = -lights[i]->position + 2 * (lights[i]->position.dot(N)) * N;
+        R.normalize();
+        diffuse = material->kd * material->color * lights[i]->color * max(0.0,L.dot(N));
+        specular = material->ks * lights[i]->color * pow(max(0.0,R.dot(V)),material->n);
+        totalDiffuse += diffuse;
+        totalSpecular += specular;
+        Ray shadowRay(hit, -L);
+    }
+    color = ambient + totalDiffuse + totalSpecular;
+
+    Vector direction = (lights[0]->position - hit).normalize();
 
     /****************************************************
     * This is where you should insert the color
@@ -56,8 +76,6 @@ Color Scene::trace(const Ray &ray)
     *        Color*Color        dito
     *        pow(a,b)           a to the power of b
     ****************************************************/
-
-    Color color = material->color;                  // place holder
 
     return color;
 }
