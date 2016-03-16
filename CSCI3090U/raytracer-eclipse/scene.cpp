@@ -16,6 +16,7 @@
 
 #include "scene.h"
 #include "material.h"
+#include <iostream>
 
 Color Scene::trace(const Ray &ray)
 {
@@ -40,10 +41,15 @@ Color Scene::trace(const Ray &ray)
 
     Triple R;
     Vector L;
+    Hit shadowMinHit(std::numeric_limits<double>::infinity(),Vector());
+    
     Color color, ambient, diffuse, specular, totalDiffuse, totalSpecular;
+    
     ambient = material->ka * material->color;
-    Ray shadowRay;
 
+
+
+    // Diffusion and specular calculations
     for(int i = 0;i<lights.size();i++){
         L = lights[i]->position - N;
         L.normalize();
@@ -51,31 +57,51 @@ Color Scene::trace(const Ray &ray)
         R.normalize();
         diffuse = material->kd * material->color * lights[i]->color * max(0.0,L.dot(N));
         specular = material->ks * lights[i]->color * pow(max(0.0,R.dot(V)),material->n);
+
+        // Find if in shadow
+        Ray shadowRay(hit, (lights[i]->position - hit).normalized());
+        for (unsigned int i = 0; i < objects.size(); ++i) {
+            Hit shadowHit(objects[i]->intersect(shadowRay));
+            if(shadowHit.t<min_hit.t && obj != objects[i]){
+                diffuse = Color(0.0,0.0,0.0);
+                specular = Color(0.0,0.0,0.0);
+            }
+        }
         totalDiffuse += diffuse;
         totalSpecular += specular;
-        Ray shadowRay(hit, -L);
+        // Reflection calculations
+        Color reflectColor, reflectTotalDiffuse, reflectTotalSpecular;
+        Object *reflectObj = NULL;
+        Hit reflectMinHit(std::numeric_limits<double>::infinity(),Vector());
+        Ray reflectRay(hit, ray.D - 2 * (ray.D.dot(N)) * N);
+        for (unsigned int i = 0; i < objects.size(); ++i) {
+            Hit reflectHit(objects[i]->intersect(reflectRay));
+            if(reflectHit.t < reflectMinHit.t && reflectHit.t > 0.0){
+                reflectObj = objects[i];
+                reflectMinHit.t = reflectHit.t;
+            }
+        }
+        if(reflectObj){
+            Material *reflectMaterial = reflectObj->material;
+                for(int i = 0;i<lights.size();i++){
+                    L = lights[i]->position - reflectMinHit.N;
+                    L.normalize();
+                    R = -lights[i]->position + 2 * (lights[i]->position.dot(reflectMinHit.N)) * reflectMinHit.N;
+                    R.normalize();
+                    diffuse = reflectMaterial->kd * reflectMaterial->color * lights[i]->color * max(0.0,L.dot(reflectMinHit.N));
+                    specular = reflectMaterial->ks * lights[i]->color * pow(max(0.0,R.dot(-reflectRay.D)),reflectMaterial->n);
+                    reflectTotalDiffuse += diffuse;
+                    reflectTotalSpecular += specular;
+                }
+                reflectColor = (ambient + reflectTotalDiffuse + reflectTotalSpecular);
+                totalSpecular += reflectColor * material->reflect;
+        }
     }
+
+    
+
+
     color = ambient + totalDiffuse + totalSpecular;
-
-    Vector direction = (lights[0]->position - hit).normalize();
-
-    /****************************************************
-    * This is where you should insert the color
-    * calculation (Phong model).
-    *
-    * Given: material, hit, N, V, lights[]
-    * Sought: color
-    *
-    * Hints: (see triple.h)
-    *        Triple.dot(Vector) dot product
-    *        Vector+Vector      vector sum
-    *        Vector-Vector      vector difference
-    *        Point-Point        yields vector
-    *        Vector.normalize() normalizes vector, returns length
-    *        double*Color        scales each color component (r,g,b)
-    *        Color*Color        dito
-    *        pow(a,b)           a to the power of b
-    ****************************************************/
 
     return color;
 }
