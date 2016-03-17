@@ -20,6 +20,12 @@
 
 Color Scene::trace(const Ray &ray, int count, double etaIn)
 {
+    bool shadowTrace = true;
+    bool reflectTrace = true;
+    bool refractTrace = true;
+    bool diffuseTrace = true;
+    bool specularTrace = true;
+    bool ambientTrace = true;
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
     Object *obj = NULL;
@@ -45,17 +51,17 @@ Color Scene::trace(const Ray &ray, int count, double etaIn)
     Triple R;
     Vector L;
     Vector tempN = N;
-    if(count!=10){
+    if(count!=10 && refractTrace ){
         if(material->refract > 0.0){
             if(ray.D.dot(N) > 0.0){
                 tempN = -N;
             }
-    
+
             double etaOut = material->eta;
             if(etaIn == etaOut){
                 etaOut = 1.0;
             }
-    
+
             double check = 1 - ((pow(etaIn,2)*(1 - (pow(ray.D.dot(tempN),2))))/pow(etaOut,2));
             if(check >= 0.0){
                 Vector t = ((etaIn * (ray.D - tempN * (ray.D.dot(tempN))))/etaOut) - (tempN * sqrt(check));
@@ -68,39 +74,49 @@ Color Scene::trace(const Ray &ray, int count, double etaIn)
         }
     }
 
-    if(count!=10){
+    if(count!=10 && reflectTrace){
         Ray reflectRay(hit, (ray.D - 2 * (ray.D.dot(N)) * N).normalized());
         hit_jiggle = reflectRay.at(pow(2,-32));
         reflectRay = Ray(hit_jiggle, (ray.D - 2 * (ray.D.dot(N)) * N).normalized());
-    
+
         reflectPortion = trace(reflectRay, count++) * material->reflect;
     }
 
     // Diffusion and specular calculations
     for(int i = 0;i<lights.size();i++){
-        L = lights[i]->position - N;
-        L.normalize();
-        R = -lights[i]->position + 2 * (lights[i]->position.dot(N)) * N;
-        R.normalize();
-        diffuse = material->kd * material->color * lights[i]->color * max(0.0,L.dot(N));
-        specular = material->ks * lights[i]->color * pow(max(0.0,R.dot(V)),material->n);
 
+        if(diffuseTrace){
+            L = lights[i]->position - N;
+            L.normalize();
+            diffuse = material->kd * material->color * lights[i]->color * max(0.0,L.dot(N));
+        }
+        if(specularTrace){
+            R = -lights[i]->position + 2 * (lights[i]->position.dot(N)) * N;
+            R.normalize();
+            specular = material->ks * lights[i]->color * pow(max(0.0,R.dot(V)),material->n);
+        }
         // Find if in shadow
-        Ray shadowRay(hit, (lights[i]->position - hit).normalized());
-        hit_jiggle = shadowRay.at(pow(2,-32));
-        shadowRay = Ray(hit_jiggle,(lights[i]->position - hit).normalized());
-        for (unsigned int i = 0; i < objects.size(); ++i) {
-            Hit shadowHit(objects[i]->intersect(shadowRay));
-            if(shadowHit.t<min_hit.t){
-                diffuse = Color(0.0,0.0,0.0);
-                specular = Color(0.0,0.0,0.0);
-                break;
+        if(shadowTrace){
+            Ray shadowRay(hit, (lights[i]->position - hit).normalized());
+            hit_jiggle = shadowRay.at(pow(2,-32));
+            shadowRay = Ray(hit_jiggle,(lights[i]->position - hit).normalized());
+            for (unsigned int i = 0; i < objects.size(); ++i) {
+                Hit shadowHit(objects[i]->intersect(shadowRay));
+                if(shadowHit.t<min_hit.t){
+                    diffuse = Color(0.0,0.0,0.0);
+                    specular = Color(0.0,0.0,0.0);
+                    break;
+                }
             }
         }
         totalDiffuse += diffuse;
         totalSpecular += specular;
     }
-    ambient = material->ka * material->color;
+    if(ambientTrace){
+        ambient = material->ka * material->color;
+    }else{
+        ambient = material->color;
+    }
     color = ambient + totalDiffuse + totalSpecular + reflectPortion + refractPortion;
 
     return color;
