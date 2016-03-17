@@ -34,13 +34,14 @@ Hit Sphere::intersect(const Ray &ray)
 
     double plusRoot = (-1.0 * B + sqrt(discriminant))/(2.0 * A);
     double minusRoot = (-1.0 * B - sqrt(discriminant))/(2.0 * A);
-
-    if((plusRoot < minusRoot) && (plusRoot >= 0.0)){
+    if(plusRoot<=0.0 && minusRoot<=0.0){
+        return Hit::NO_HIT();
+    }else if(minusRoot <= 0.0){
         t = plusRoot;
-    }else if((minusRoot < plusRoot) && (minusRoot >= 0.0)){
+    }else if(plusRoot <= 0.0){
         t = minusRoot;
     }else{
-        return Hit::NO_HIT();
+        t = min(plusRoot,minusRoot);
     }
 
     Vector N = ray.at(t) - position;

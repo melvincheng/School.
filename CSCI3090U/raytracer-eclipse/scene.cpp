@@ -18,7 +18,7 @@
 #include "material.h"
 #include <iostream>
 
-Color Scene::trace(const Ray &ray, double etaIn)
+Color Scene::trace(const Ray &ray, int count, double etaIn)
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
@@ -31,6 +31,7 @@ Color Scene::trace(const Ray &ray, double etaIn)
         }
     }
 
+
     // No hit? Return background color.
     if (!obj) return Color(0.0, 0.0, 0.0);
 
@@ -39,33 +40,41 @@ Color Scene::trace(const Ray &ray, double etaIn)
     Vector N = min_hit.N;                          //the normal at hit point
     Vector V = -ray.D;                             //the view vector
 
+    Point hit_jiggle;
     Color color, ambient, diffuse, specular, totalDiffuse, totalSpecular, reflectPortion, refractPortion;
     Triple R;
     Vector L;
-    if(material->refract > 0.0){
-        if(ray.D.dot(N) > 0.0){
-            N = -N;
-        }
-        double etaOut = material->eta;
-        if(etaIn == etaOut){
-            std::cout<<"changed"<<std::endl;
-            etaOut = 1.0;
-        }
-
-        double check = 1 - ((pow(etaIn,2)*(1 - (pow(ray.D.dot(N),2))))/pow(etaOut,2));
-        if(check >= 0.0){
-            Vector t = ((etaIn * (ray.D - N * (ray.D.dot(N))))/etaOut) - (N * sqrt(check));
-            t.normalize();
-            Ray refractRay(hit, t);
-            Point hit_jiggle = refractRay.at(pow(2,-32));
-            refractRay = Ray(hit_jiggle,t);
-            refractPortion = trace(refractRay, etaOut) * material->refract;
-            std::cout<<"end"<<std::endl;
+    Vector tempN = N;
+    if(count!=10){
+        if(material->refract > 0.0){
+            if(ray.D.dot(N) > 0.0){
+                tempN = -N;
+            }
+    
+            double etaOut = material->eta;
+            if(etaIn == etaOut){
+                etaOut = 1.0;
+            }
+    
+            double check = 1 - ((pow(etaIn,2)*(1 - (pow(ray.D.dot(tempN),2))))/pow(etaOut,2));
+            if(check >= 0.0){
+                Vector t = ((etaIn * (ray.D - tempN * (ray.D.dot(tempN))))/etaOut) - (tempN * sqrt(check));
+                t.normalize();
+                Ray refractRay(hit, t);
+                hit_jiggle = refractRay.at(pow(2,-32));
+                refractRay = Ray(hit_jiggle,t);
+                refractPortion = trace(refractRay, ++count, etaOut) * material->refract;
+            }
         }
     }
 
-    Ray reflectRay(hit, ray.D - 2 * (ray.D.dot(N)) * N);    
-    reflectPortion = trace(reflectRay) * material->reflect;
+    if(count!=10){
+        Ray reflectRay(hit, (ray.D - 2 * (ray.D.dot(N)) * N).normalized());
+        hit_jiggle = reflectRay.at(pow(2,-32));
+        reflectRay = Ray(hit_jiggle, (ray.D - 2 * (ray.D.dot(N)) * N).normalized());
+    
+        reflectPortion = trace(reflectRay, count++) * material->reflect;
+    }
 
     // Diffusion and specular calculations
     for(int i = 0;i<lights.size();i++){
@@ -78,6 +87,8 @@ Color Scene::trace(const Ray &ray, double etaIn)
 
         // Find if in shadow
         Ray shadowRay(hit, (lights[i]->position - hit).normalized());
+        hit_jiggle = shadowRay.at(pow(2,-32));
+        shadowRay = Ray(hit_jiggle,(lights[i]->position - hit).normalized());
         for (unsigned int i = 0; i < objects.size(); ++i) {
             Hit shadowHit(objects[i]->intersect(shadowRay));
             if(shadowHit.t<min_hit.t){
