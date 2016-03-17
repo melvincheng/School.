@@ -18,7 +18,7 @@
 #include "material.h"
 #include <iostream>
 
-Color Scene::trace(const Ray &ray)
+Color Scene::trace(const Ray &ray, double etaIn)
 {
     // Find hit object and distance
     Hit min_hit(std::numeric_limits<double>::infinity(),Vector());
@@ -39,15 +39,33 @@ Color Scene::trace(const Ray &ray)
     Vector N = min_hit.N;                          //the normal at hit point
     Vector V = -ray.D;                             //the view vector
 
+    Color color, ambient, diffuse, specular, totalDiffuse, totalSpecular, reflectPortion, refractPortion;
     Triple R;
     Vector L;
-    Hit shadowMinHit(std::numeric_limits<double>::infinity(),Vector());
-    
-    Color color, ambient, diffuse, specular, totalDiffuse, totalSpecular;
-    
-    ambient = material->ka * material->color;
+    if(material->refract > 0.0){
+        if(ray.D.dot(N) > 0.0){
+            N = -N;
+        }
+        double etaOut = material->eta;
+        if(etaIn == etaOut){
+            std::cout<<"changed"<<std::endl;
+            etaOut = 1.0;
+        }
 
+        double check = 1 - ((pow(etaIn,2)*(1 - (pow(ray.D.dot(N),2))))/pow(etaOut,2));
+        if(check >= 0.0){
+            Vector t = ((etaIn * (ray.D - N * (ray.D.dot(N))))/etaOut) - (N * sqrt(check));
+            t.normalize();
+            Ray refractRay(hit, t);
+            Point hit_jiggle = refractRay.at(pow(2,-32));
+            refractRay = Ray(hit_jiggle,t);
+            refractPortion = trace(refractRay, etaOut) * material->refract;
+            std::cout<<"end"<<std::endl;
+        }
+    }
 
+    Ray reflectRay(hit, ray.D - 2 * (ray.D.dot(N)) * N);    
+    reflectPortion = trace(reflectRay) * material->reflect;
 
     // Diffusion and specular calculations
     for(int i = 0;i<lights.size();i++){
@@ -62,46 +80,17 @@ Color Scene::trace(const Ray &ray)
         Ray shadowRay(hit, (lights[i]->position - hit).normalized());
         for (unsigned int i = 0; i < objects.size(); ++i) {
             Hit shadowHit(objects[i]->intersect(shadowRay));
-            if(shadowHit.t<min_hit.t && obj != objects[i]){
+            if(shadowHit.t<min_hit.t){
                 diffuse = Color(0.0,0.0,0.0);
                 specular = Color(0.0,0.0,0.0);
+                break;
             }
         }
         totalDiffuse += diffuse;
         totalSpecular += specular;
-        // Reflection calculations
-        Color reflectColor, reflectTotalDiffuse, reflectTotalSpecular;
-        Object *reflectObj = NULL;
-        Hit reflectMinHit(std::numeric_limits<double>::infinity(),Vector());
-        Ray reflectRay(hit, ray.D - 2 * (ray.D.dot(N)) * N);
-        for (unsigned int i = 0; i < objects.size(); ++i) {
-            Hit reflectHit(objects[i]->intersect(reflectRay));
-            if(reflectHit.t < reflectMinHit.t && reflectHit.t > 0.0){
-                reflectObj = objects[i];
-                reflectMinHit.t = reflectHit.t;
-            }
-        }
-        if(reflectObj){
-            Material *reflectMaterial = reflectObj->material;
-                for(int i = 0;i<lights.size();i++){
-                    L = lights[i]->position - reflectMinHit.N;
-                    L.normalize();
-                    R = -lights[i]->position + 2 * (lights[i]->position.dot(reflectMinHit.N)) * reflectMinHit.N;
-                    R.normalize();
-                    diffuse = reflectMaterial->kd * reflectMaterial->color * lights[i]->color * max(0.0,L.dot(reflectMinHit.N));
-                    specular = reflectMaterial->ks * lights[i]->color * pow(max(0.0,R.dot(-reflectRay.D)),reflectMaterial->n);
-                    reflectTotalDiffuse += diffuse;
-                    reflectTotalSpecular += specular;
-                }
-                reflectColor = (ambient + reflectTotalDiffuse + reflectTotalSpecular);
-                totalSpecular += reflectColor * material->reflect;
-        }
     }
-
-    
-
-
-    color = ambient + totalDiffuse + totalSpecular;
+    ambient = material->ka * material->color;
+    color = ambient + totalDiffuse + totalSpecular + reflectPortion + refractPortion;
 
     return color;
 }

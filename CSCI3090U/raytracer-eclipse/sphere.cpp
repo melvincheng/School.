@@ -27,13 +27,13 @@ Hit Sphere::intersect(const Ray &ray)
     double B = 2.0 * ray.D.dot(ray.O - position);
     double C = (ray.O - position).dot(ray.O - position) - (r * r);
 
-    double root = B * B - 4.0 * A * C;
-    if(root < 0.0){
+    double discriminant = B * B - 4.0 * A * C;
+    if(discriminant < 0.0){
         return Hit::NO_HIT();
     }
 
-    double plusRoot = (-1.0 * B + sqrt(root))/(2.0 * A);
-    double minusRoot = (-1.0 * B - sqrt(root))/(2.0 * A);
+    double plusRoot = (-1.0 * B + sqrt(discriminant))/(2.0 * A);
+    double minusRoot = (-1.0 * B - sqrt(discriminant))/(2.0 * A);
 
     if((plusRoot < minusRoot) && (plusRoot >= 0.0)){
         t = plusRoot;
