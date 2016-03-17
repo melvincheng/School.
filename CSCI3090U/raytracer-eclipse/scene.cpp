@@ -86,7 +86,7 @@ Color Scene::trace(const Ray &ray, int count, double etaIn)
     for(int i = 0;i<lights.size();i++){
 
         if(diffuseTrace){
-            L = lights[i]->position - N;
+            L = lights[i]->position - hit;
             L.normalize();
             diffuse = material->kd * material->color * lights[i]->color * max(0.0,L.dot(N));
         }
@@ -97,12 +97,12 @@ Color Scene::trace(const Ray &ray, int count, double etaIn)
         }
         // Find if in shadow
         if(shadowTrace){
-            Ray shadowRay(hit, (lights[i]->position - hit).normalized());
+            Ray shadowRay(hit, L);
             hit_jiggle = shadowRay.at(pow(2,-32));
-            shadowRay = Ray(hit_jiggle,(lights[i]->position - hit).normalized());
+            shadowRay = Ray(hit_jiggle,L);
             for (unsigned int i = 0; i < objects.size(); ++i) {
                 Hit shadowHit(objects[i]->intersect(shadowRay));
-                if(shadowHit.t<min_hit.t){
+                if(shadowHit.t>0.0){
                     diffuse = Color(0.0,0.0,0.0);
                     specular = Color(0.0,0.0,0.0);
                     break;
