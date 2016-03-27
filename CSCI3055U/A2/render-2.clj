@@ -1,0 +1,12 @@
+(defmulti render class)
+(defmethod render Long [x] (str "INTEGER["x"]"))
+(defmethod render String [x] x)
+(defmethod render Double [x] (str "FLOAT["x"]"))
+(defmethod render clojure.lang.PersistentVector [x] (clojure.string/join " " (map render x)))
+(defmethod render :default [x] str "BLANK")
+
+(println (render 10.0))
+(println (render 10))
+(println (render "10"))
+(println (render [1,2.0,"3"]))
+(println (render 'a))
