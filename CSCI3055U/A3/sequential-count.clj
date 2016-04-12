@@ -1,8 +1,16 @@
-; (defn distinctCount [data] (map str data))
+(def character
+	(map char (range 33 126)))
 
-(def data ["asdas" "jgfk" "onds"])
-; (println distinctCount data)
+(defn rand-char []
+	(rand-nth character))
 
-(defn sequential-count [data] (reduce +(map count(map distinct data))))
+(defn rand-string [length]
+	(apply str (repeatedly length #(rand-char))))
 
-(println (sequential-count data))
+(defn rand-strArr[size length]
+	(repeatedly size #(rand-string length)))
+
+(defn sequential-count [data]
+	(reduce +(map count(map distinct data))))
+
+(doseq [i(range 0 10100000 100000)] (time(sequential-count (rand-strArr i 10))))

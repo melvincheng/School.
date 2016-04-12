@@ -1,0 +1,602 @@
+Ecoli 
+J48
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         283               84.2262 %
+Incorrectly Classified Instances        53               15.7738 %
+Kappa statistic                          0.7824
+Mean absolute error                      0.0486
+Root mean squared error                  0.1851
+Relative absolute error                 26.5877 %
+Root relative squared error             61.3413 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.951     0.036      0.951     0.951     0.951      0.962    cp
+                 0.844     0.066      0.793     0.844     0.818      0.907    im
+                 0.865     0.032      0.833     0.865     0.849      0.904    pp
+                 0.571     0.03       0.69      0.571     0.625      0.855    imU
+                 0.7       0.028      0.609     0.7       0.651      0.89     om
+                 0.6       0.006      0.6       0.6       0.6        0.993    omL
+                 0         0          0         0         0          0.49     imL
+                 0         0          0         0         0          0.479    imS
+Weighted Avg.    0.842     0.04       0.832     0.842     0.836      0.92 
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- classified as
+ 136   0   4   0   3   0   0   0 |   a = cp
+   2  65   0   8   2   0   0   0 |   b = im
+   4   2  45   0   1   0   0   0 |   c = pp
+   1  12   1  20   1   0   0   0 |   d = imU
+   0   3   3   0  14   0   0   0 |   e = om
+   0   0   0   0   2   3   0   0 |   f = omL
+   0   0   0   0   0   2   0   0 |   g = imL
+   0   0   1   1   0   0   0   0 |   h = imS
+
+JRip
+Time taken to build model: 0.07 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         271               80.6548 %
+Incorrectly Classified Instances        65               19.3452 %
+Kappa statistic                          0.7311
+Mean absolute error                      0.0608
+Root mean squared error                  0.2013
+Relative absolute error                 33.2586 %
+Root relative squared error             66.7354 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.951     0.088      0.889     0.951     0.919      0.943    cp
+                 0.766     0.054      0.808     0.766     0.787      0.928    im
+                 0.788     0.025      0.854     0.788     0.82       0.924    pp
+                 0.514     0.06       0.5       0.514     0.507      0.852    imU
+                 0.75      0.013      0.789     0.75      0.769      0.874    om
+                 0.4       0.015      0.286     0.4       0.333      0.767    omL
+                 0         0          0         0         0          0.708    imL
+                 0         0          0         0         0          0.38     imS
+Weighted Avg.    0.807     0.061      0.799     0.807     0.802      0.916
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- classified as
+ 136   0   3   2   2   0   0   0 |   a = cp
+   2  59   0  14   1   1   0   0 |   b = im
+   8   1  41   2   0   0   0   0 |   c = pp
+   3  12   0  18   1   1   0   0 |   d = imU
+   1   0   3   0  15   1   0   0 |   e = om
+   2   0   1   0   0   2   0   0 |   f = omL
+   0   0   0   0   0   2   0   0 |   g = imL
+   1   1   0   0   0   0   0   0 |   h = imS
+
+NaiveBayes
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         287               85.4167 %
+Incorrectly Classified Instances        49               14.5833 %
+Kappa statistic                          0.8002
+Mean absolute error                      0.0429
+Root mean squared error                  0.1639
+Relative absolute error                 23.461  %
+Root relative squared error             54.3314 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.958     0.041      0.945     0.958     0.951      0.986    cp
+                 0.727     0.031      0.875     0.727     0.794      0.966    im
+                 0.846     0.032      0.83      0.846     0.838      0.945    pp
+                 0.829     0.06       0.617     0.829     0.707      0.937    imU
+                 0.9       0.009      0.857     0.9       0.878      0.996    om
+                 0.6       0          1         0.6       0.75       0.996    omL
+                 0         0.006      0         0         0          0.06     imL
+                 0         0.003      0         0         0          0.148    imS
+Weighted Avg.    0.854     0.036      0.861     0.854     0.854      0.96 
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- classified as
+ 137   2   4   0   0   0   0   0 |   a = cp
+   3  56   1  16   0   0   0   1 |   b = im
+   4   1  44   0   3   0   0   0 |   c = pp
+   1   5   0  29   0   0   0   0 |   d = imU
+   0   0   2   0  18   0   0   0 |   e = om
+   0   0   0   0   0   3   2   0 |   f = omL
+   0   0   1   1   0   0   0   0 |   g = imL
+   0   0   1   1   0   0   0   0 |   h = imS
+
+K-Nearest
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         270               80.3571 %
+Incorrectly Classified Instances        66               19.6429 %
+Kappa statistic                          0.7295
+Mean absolute error                      0.0535
+Root mean squared error                  0.2189
+Relative absolute error                 29.238  %
+Root relative squared error             72.5574 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.93      0.052      0.93      0.93      0.93       0.942    cp
+                 0.727     0.081      0.727     0.727     0.727      0.814    im
+                 0.846     0.046      0.772     0.846     0.807      0.903    pp
+                 0.486     0.056      0.5       0.486     0.493      0.713    imU
+                 0.75      0.006      0.882     0.75      0.811      0.896    om
+                 1         0.003      0.833     1         0.909      0.999    omL
+                 0         0.006      0         0         0          0.695    imL
+                 0         0          0         0         0          0.698    imS
+Weighted Avg.    0.804     0.054      0.799     0.804     0.801      0.878
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- classified as
+ 133   4   6   0   0   0   0   0 |   a = cp
+   4  56   1  15   0   0   1   0 |   b = im
+   5   1  44   0   2   0   0   0 |   c = pp
+   1  15   1  17   0   0   1   0 |   d = imU
+   0   0   4   1  15   0   0   0 |   e = om
+   0   0   0   0   0   5   0   0 |   f = omL
+   0   1   0   0   0   1   0   0 |   g = imL
+   0   0   1   1   0   0   0   0 |   h = imS
+
+Neural networks
+Time taken to build model: 0.88 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         289               86.0119 %
+Incorrectly Classified Instances        47               13.9881 %
+Kappa statistic                          0.8066
+Mean absolute error                      0.0484
+Root mean squared error                  0.1704
+Relative absolute error                 26.479  %
+Root relative squared error             56.4913 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.965     0.036      0.952     0.965     0.958      0.98     cp
+                 0.831     0.062      0.8       0.831     0.815      0.951    im
+                 0.846     0.032      0.83      0.846     0.838      0.952    pp
+                 0.629     0.037      0.667     0.629     0.647      0.935    imU
+                 0.85      0.009      0.85      0.85      0.85       0.977    om
+                 0.8       0.003      0.8       0.8       0.8        0.997    omL
+                 0         0          0         0         0          0.187    imL
+                 0         0          0         0         0          0.34     imS
+Weighted Avg.    0.86      0.039      0.849     0.86      0.854      0.956
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- Classsified as
+ 138   1   4   0   0   0   0   0 |   a = cp
+   2  64   1  10   0   0   0   0 |   b = im
+   4   2  44   0   2   0   0   0 |   c = pp
+   1  12   0  22   0   0   0   0 |   d = imU
+   0   0   3   0  17   0   0   0 |   e = om
+   0   0   0   0   1   4   0   0 |   f = omL
+   0   0   0   1   0   1   0   0 |   g = imL
+   0   1   1   0   0   0   0   0 |   h = imS
+
+
+Glass
+J48
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         141               65.8879 %
+Incorrectly Classified Instances        73               34.1121 %
+Kappa statistic                          0.5412
+Mean absolute error                      0.1059
+Root mean squared error                  0.2928
+Relative absolute error                 50.0098 %
+Root relative squared error             90.2088 %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.714     0.181      0.658     0.714     0.685      0.792    1
+                 0.566     0.167      0.652     0.566     0.606      0.756    2
+                 0.294     0.061      0.294     0.294     0.294      0.722    3
+                 0         0          0         0         0          ?        4
+                 0.846     0.025      0.688     0.846     0.759      0.944    5
+                 0.889     0.015      0.727     0.889     0.8        0.938    6
+                 0.828     0.022      0.857     0.828     0.842      0.884    7
+Weighted Avg.    0.659     0.128      0.658     0.659     0.656      0.801
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 50 14  4  0  0  1  1 |  a = 1
+ 16 43  8  0  5  2  2 |  b = 2
+  7  5  5  0  0  0  0 |  c = 3
+  0  0  0  0  0  0  0 |  d = 4
+  0  1  0  0 11  0  1 |  e = 5
+  1  0  0  0  0  8  0 |  f = 6
+  2  3  0  0  0  0 24 |  g = 7
+
+
+
+JRip
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         149               69.6262 %
+Incorrectly Classified Instances        65               30.3738 %
+Kappa statistic                          0.5741
+Mean absolute error                      0.1139
+Root mean squared error                  0.2657
+Relative absolute error                 53.8052 %
+Root relative squared error             81.8743 %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.714     0.167      0.676     0.714     0.694      0.816    1
+                 0.789     0.225      0.659     0.789     0.719      0.818    2
+                 0.118     0.01       0.5       0.118     0.19       0.655    3
+                 0         0          0         0         0          ?        4
+                 0.615     0.015      0.727     0.615     0.667      0.803    5
+                 0.556     0.015      0.625     0.556     0.588      0.805    6
+                 0.828     0.011      0.923     0.828     0.873      0.906    7
+Weighted Avg.    0.696     0.138      0.69      0.696     0.681      0.815
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 50 17  1  0  0  1  1 |  a = 1
+ 14 60  1  0  0  1  0 |  b = 2
+  9  5  2  0  0  1  0 |  c = 3
+  0  0  0  0  0  0  0 |  d = 4
+  0  4  0  0  8  0  1 |  e = 5
+  0  4  0  0  0  5  0 |  f = 6
+  1  1  0  0  3  0 24 |  g = 7
+
+
+NaiveBayes
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         106               49.5327 %
+Incorrectly Classified Instances       108               50.4673 %
+Kappa statistic                          0.334 
+Mean absolute error                      0.1521
+Root mean squared error                  0.3343
+Relative absolute error                 71.8506 %
+Root relative squared error            102.9939 %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.714     0.396      0.467     0.714     0.565      0.718    1
+                 0.197     0.087      0.556     0.197     0.291      0.717    2
+                 0.353     0.112      0.214     0.353     0.267      0.699    3
+                 0         0          0         0         0          ?        4
+                 0.231     0.045      0.25      0.231     0.24       0.835    5
+                 0.889     0.02       0.667     0.889     0.762      0.985    6
+                 0.828     0.022      0.857     0.828     0.842      0.941    7
+Weighted Avg.    0.495     0.176      0.527     0.495     0.47       0.765
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 50  4 14  0  0  2  0 |  a = 1
+ 46 15  8  0  5  1  1 |  b = 2
+ 10  0  6  0  0  1  0 |  c = 3
+  0  0  0  0  0  0  0 |  d = 4
+  0  8  0  0  3  0  2 |  e = 5
+  0  0  0  0  0  8  1 |  f = 6
+  1  0  0  0  4  0 24 |  g = 7
+
+K-nearest
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         151               70.5607 %
+Incorrectly Classified Instances        63               29.4393 %
+Kappa statistic                          0.6017
+Mean absolute error                      0.0897
+Root mean squared error                  0.2852
+Relative absolute error                 42.3765 %
+Root relative squared error             87.8768 %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.771     0.139      0.73      0.771     0.75       0.823    1
+                 0.671     0.145      0.718     0.671     0.694      0.749    2
+                 0.353     0.061      0.333     0.353     0.343      0.67     3
+                 0         0          0         0         0          ?        4
+                 0.769     0.03       0.625     0.769     0.69       0.824    5
+                 0.667     0.01       0.75      0.667     0.706      0.819    6
+                 0.828     0.016      0.889     0.828     0.857      0.903    7
+Weighted Avg.    0.706     0.106      0.71      0.706     0.707      0.795
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 54  9  7  0  0  0  0 |  a = 1
+ 14 51  5  0  4  1  1 |  b = 2
+  6  5  6  0  0  0  0 |  c = 3
+  0  0  0  0  0  0  0 |  d = 4
+  0  2  0  0 10  0  1 |  e = 5
+  0  1  0  0  1  6  1 |  f = 6
+  0  3  0  0  1  1 24 |  g = 7
+
+
+MuiltilayerPerceptron
+Time taken to build model: 0.43 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         148               69.1589 %
+Incorrectly Classified Instances        66               30.8411 %
+Kappa statistic                          0.5677
+Mean absolute error                      0.1067
+Root mean squared error                  0.2471
+Relative absolute error                 50.3806 %
+Root relative squared error             76.124  %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.814     0.229      0.633     0.814     0.713      0.881    1
+                 0.697     0.174      0.688     0.697     0.693      0.856    2
+                 0.059     0.005      0.5       0.059     0.105      0.732    3
+                 0         0          0         0         0          ?        4
+                 0.692     0.02       0.692     0.692     0.692      0.981    5
+                 0.556     0.015      0.625     0.556     0.588      0.933    6
+                 0.793     0.005      0.958     0.793     0.868      0.908    7
+Weighted Avg.    0.692     0.14       0.69      0.692     0.672      0.872
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 57 12  1  0  0  0  0 |  a = 1
+ 20 53  0  0  1  2  0 |  b = 2
+ 10  6  1  0  0  0  0 |  c = 3
+  0  0  0  0  0  0  0 |  d = 4
+  0  3  0  0  9  0  1 |  e = 5
+  2  1  0  0  1  5  0 |  f = 6
+  1  2  0  0  2  1 23 |  g = 7
+
+
+Image
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         187               89.0476 %
+Incorrectly Classified Instances        23               10.9524 %
+Kappa statistic                          0.8722
+Mean absolute error                      0.0333
+Root mean squared error                  0.1652
+Relative absolute error                 15.5312 %
+Root relative squared error             50.4698 %
+Total Number of Instances              210     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.933     0.028      0.848     0.933     0.889      0.948    BRICKFACE
+                 0         0          0         0         0          ?        FLY
+                 1         0          1         1         1          1        SKY
+                 0.867     0.022      0.867     0.867     0.867      0.905    FOLIAGE
+                 0.767     0.022      0.852     0.767     0.807      0.898    CEMENT
+                 0.767     0.028      0.821     0.767     0.793      0.888    WINDOW
+                 0.967     0.011      0.935     0.967     0.951      0.978    PATH
+                 0.933     0.017      0.903     0.933     0.918      0.959    GRASS
+Weighted Avg.    0.89      0.018      0.89      0.89      0.889      0.939
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h   <-- classified as
+ 28  0  0  0  0  2  0  0 |  a = BRICKFACE
+  0  0  0  0  0  0  0  0 |  b = FLY
+  0  0 30  0  0  0  0  0 |  c = SKY
+  1  0  0 26  2  1  0  0 |  d = FOLIAGE
+  1  0  0  1 23  2  1  2 |  e = CEMENT
+  2  0  0  3  2 23  0  0 |  f = WINDOW
+  0  0  0  0  0  0 29  1 |  g = PATH
+  1  0  0  0  0  0  1 28 |  h = GRASS
+
+JRip
+Time taken to build model: 0.03 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         171               81.4286 %
+Incorrectly Classified Instances        39               18.5714 %
+Kappa statistic                          0.7833
+Mean absolute error                      0.0583
+Root mean squared error                  0.2016
+Relative absolute error                 27.1753 %
+Root relative squared error             61.5893 %
+Total Number of Instances              210     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.8       0.044      0.75      0.8       0.774      0.896    BRICKFACE
+                 0         0          0         0         0          ?        FLY
+                 0.867     0.006      0.963     0.867     0.912      0.947    SKY
+                 0.8       0.033      0.8       0.8       0.8        0.913    FOLIAGE
+                 0.667     0.061      0.645     0.667     0.656      0.876    CEMENT
+                 0.667     0.033      0.769     0.667     0.714      0.911    WINDOW
+                 0.967     0.006      0.967     0.967     0.967      0.98     PATH
+                 0.933     0.033      0.824     0.933     0.875      0.954    GRASS
+Weighted Avg.    0.814     0.031      0.817     0.814     0.814      0.925
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h   <-- classified as
+ 24  0  1  1  2  1  0  1 |  a = BRICKFACE
+  0  0  0  0  0  0  0  0 |  b = FLY
+  0  0 26  0  3  1  0  0 |  c = SKY
+  1  0  0 24  2  3  0  0 |  d = FOLIAGE
+  4  0  0  2 20  1  0  3 |  e = CEMENT
+  2  0  0  3  3 20  0  2 |  f = WINDOW
+  0  0  0  0  1  0 29  0 |  g = PATH
+  1  0  0  0  0  0  1 28 |  h = GRASS
+
+NaiveBayes
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         163               77.619  %
+Incorrectly Classified Instances        47               22.381  %
+Kappa statistic                          0.7389
+Mean absolute error                      0.0557
+Root mean squared error                  0.2269
+Relative absolute error                 25.9739 %
+Root relative squared error             69.315  %
+Total Number of Instances              210     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.9       0.028      0.844     0.9       0.871      0.993    BRICKFACE
+                 0         0          0         0         0          ?        FLY
+                 1         0          1         1         1          1        SKY
+                 0.2       0.05       0.4       0.2       0.267      0.918    FOLIAGE
+                 0.733     0.056      0.688     0.733     0.71       0.876    CEMENT
+                 0.7       0.128      0.477     0.7       0.568      0.839    WINDOW
+                 0.9       0          1         0.9       0.947      0.992    PATH
+                 1         0          1         1         1          1        GRASS
+Weighted Avg.    0.776     0.037      0.773     0.776     0.766      0.945
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h   <-- classified as
+ 27  0  0  0  2  1  0  0 |  a = BRICKFACE
+  0  0  0  0  0  0  0  0 |  b = FLY
+  0  0 30  0  0  0  0  0 |  c = SKY
+  1  0  0  6  3 20  0  0 |  d = FOLIAGE
+  2  0  0  4 22  2  0  0 |  e = CEMENT
+  2  0  0  3  4 21  0  0 |  f = WINDOW
+  0  0  0  2  1  0 27  0 |  g = PATH
+  0  0  0  0  0  0  0 30 |  h = GRASS
+
+K-nearest
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         183               87.1429 %
+Incorrectly Classified Instances        27               12.8571 %
+Kappa statistic                          0.85  
+Mean absolute error                      0.0397
+Root mean squared error                  0.1761
+Relative absolute error                 18.5207 %
+Root relative squared error             53.8043 %
+Total Number of Instances              210     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.933     0.022      0.875     0.933     0.903      0.956    BRICKFACE
+                 0         0          0         0         0          ?        FLY
+                 1         0          1         1         1          1        SKY
+                 0.8       0.028      0.828     0.8       0.814      0.886    FOLIAGE
+                 0.733     0.033      0.786     0.733     0.759      0.85     CEMENT
+                 0.633     0.056      0.655     0.633     0.644      0.789    WINDOW
+                 1         0.011      0.938     1         0.968      0.994    PATH
+                 1         0          1         1         1          1        GRASS
+Weighted Avg.    0.871     0.021      0.869     0.871     0.87       0.925
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h   <-- classified as
+ 28  0  0  0  1  1  0  0 |  a = BRICKFACE
+  0  0  0  0  0  0  0  0 |  b = FLY
+  0  0 30  0  0  0  0  0 |  c = SKY
+  0  0  0 24  1  5  0  0 |  d = FOLIAGE
+  2  0  0  0 22  4  2  0 |  e = CEMENT
+  2  0  0  5  4 19  0  0 |  f = WINDOW
+  0  0  0  0  0  0 30  0 |  g = PATH
+  0  0  0  0  0  0  0 30 |  h = GRASS
+
+Multilayer Perceptron
+Time taken to build model: 0.92 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         186               88.5714 %
+Incorrectly Classified Instances        24               11.4286 %
+Kappa statistic                          0.8667
+Mean absolute error                      0.0377
+Root mean squared error                  0.1499
+Relative absolute error                 17.563  %
+Root relative squared error             45.7901 %
+Total Number of Instances              210     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.967     0.022      0.879     0.967     0.921      0.999    BRICKFACE
+                 0         0          0         0         0          ?        FLY
+                 1         0.006      0.968     1         0.984      1        SKY
+                 0.8       0.039      0.774     0.8       0.787      0.974    FOLIAGE
+                 0.733     0.006      0.957     0.733     0.83       0.898    CEMENT
+                 0.7       0.061      0.656     0.7       0.677      0.917    WINDOW
+                 1         0          1         1         1          1        PATH
+                 1         0          1         1         1          1        GRASS
+Weighted Avg.    0.886     0.019      0.89      0.886     0.886      0.969
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h   <-- classified as
+ 29  0  0  0  0  1  0  0 |  a = BRICKFACE
+  0  0  0  0  0  0  0  0 |  b = FLY
+  0  0 30  0  0  0  0  0 |  c = SKY
+  0  0  1 24  0  5  0  0 |  d = FOLIAGE
+  2  0  0  1 22  5  0  0 |  e = CEMENT
+  2  0  0  6  1 21  0  0 |  f = WINDOW
+  0  0  0  0  0  0 30  0 |  g = PATH
+  0  0  0  0  0  0  0 30 |  h = GRASS
+
+
+Multilayer perceptron takes the longest to run but generally has a consistent higher accuracy compared to the other algorithms. J48 and K-nearest both generally have a high accuracy and are faster than multilayer perception. However, both J48 and K-nearest do not consistently place higher than the other algorithms but still are generally not much less accurate than the other algorithms. JRip seems to be consistently lower than most algorithms but not by a large margin. Naivebayes seem to generally be as accurate as J48, K-nearest, but can sometimes be very inaccuracte compared to the other algorithms. Generally, the algorithms seem to a have a similar misclassification percent, ranging from 1% to 10%, but rarely, the difference can reach up to 20%.
+
+The overall winner for accuracy would probably be multilayer perceptron but because of its speed, J48 or K-nearest would probably be the overall winner.
